@@ -12,16 +12,21 @@ class Answer extends Model
 
     public function comments()
     {
-    	return $this->hasMany("App\Comment")
+    	return $this->hasMany("App\Comment");
     }
 
     public function user()
     {
-    	return $this->BelongsTo("App\User");
+    	return $this->belongsTo("App\User");
     }
 
     public function question()
     {
-    	return $this->BelongsTo("App\Question");
+    	return $this->belongsTo("App\Question");
     }    
+
+    public function tags()
+    {
+        return $this->belongsToMany("App\Tag");
+    }
 }
