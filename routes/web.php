@@ -11,17 +11,21 @@
 |
 */
 
+
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('questions', function () {
-    return view('questions');
-});
+Route::resource('questions', 'QuestionsController');
 
-Route::get('answers', function () {
-    return view('answers');
-});
+// Route::get('questions', function () {
+//     return view('questions');
+// });
+
+// Route::get('answers', function () {
+//     return view('answers');
+// });
 
 Auth::routes();
 

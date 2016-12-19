@@ -1,0 +1,60 @@
+     
+   h3.question {
+      line-height: 30px;
+      margin-top: 0px;
+   }
+
+   .col-md-10 a {
+      text-decoration: none;
+   }
+
+   .col-md-8 {
+      padding-left: 0px;
+      padding-right: 0px;
+   }
+
+   .col-md-4 {
+      padding-right: 4px;
+   }
+
+   .help-block hr {
+      margin: 4px;
+   }
+
+   .author {
+      margin: 8px 0px 3px 0;
+      color: #999;
+      float: right;
+      padding: 4px;
+   }
+
+   .author > div {
+      color: #999;
+      font-size: 11px;
+   }
+
+   .division {
+      margin-top: 0px;
+   }
+
+   .comments {
+      margin:25px 0px 30px 80px;
+   }
+
+   .answer-comments {
+      margin-top: 67px;
+   }
+
+   .add-comment-link {
+      color: #999;
+   }
+
+   .questions-list > .questions-list-item {
+      color: #333;
+      font-size: 16px;
+   }
+
+   .questions-list > .questions-list-item:hover {
+      text-decoration: none;
+      color: #999;
+   }
