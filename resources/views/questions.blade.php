@@ -9,11 +9,15 @@
             <div class="row">
                <div class="col-md-12 questions-list">
                   <div><a href="">{{$question_array->user->name}}</a> <i>on April 25, 2015</i></div>
-                  <a class="questions-list-item" href="">{{$question_array->question}}</a>
-                  <a href="" class="btn btn-primary btn-xs pull-right">{{$question_array->answers->count()}} Answers</a>
+                  <a class="questions-list-item" href="{{url('questions/'.$question_array->id)}}">
+                     <div>
+                     {{$question_array->title}}
+                     </div>
+                  </a>
+                  <a href="" class="btn btn-primary btn-xs pull-right" style="margin-top: 10px;">{{$question_array->answers->count()}} Answers</a>
                   <div style="margin-top: 10px;">
                      @foreach($question_array->tags as $tag_array)
-                     <a href="" class="btn btn-default btn-xs">{{$tag_array->tag}}</a>
+                     <a href="" class="btn btn-info btn-xs">{{$tag_array->tag}}</a>
                      @endForeach
                   </div>
                </div>

@@ -15,10 +15,10 @@
       </span>
       <div>
          <br>
-         <a href="" class="btn btn-default btn-xs">Java</a>
-         <a href="" class="btn btn-default btn-xs">PHP</a>
-         <a href="" class="btn btn-default btn-xs">Laravel</a>
-         <a href="" class="btn btn-default btn-xs">CSS</a>
+         <a href="" class="btn btn-info btn-xs">Java</a>
+         <a href="" class="btn btn-info btn-xs">PHP</a>
+         <a href="" class="btn btn-info btn-xs">Laravel</a>
+         <a href="" class="btn btn-info btn-xs">CSS</a>
       </div>
       
       <div class="help-block comments">
@@ -36,8 +36,11 @@
             <textarea rows="1" class="form-control"></textarea>
          </div>                      -->
       </div>
-      <h4>2 Answers</h4>
+      <h4>2 Answers</h4>      
       <hr class="division">
+
+
+
       <div class="answer">
          At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fug
       </div>
@@ -63,6 +66,8 @@
          </div>                      -->
       </div>
       <hr>
+
+
       <div class="answer">
          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum est laborum test about new
       </div>
@@ -97,15 +102,25 @@
             <textarea rows="1" class="form-control"></textarea>
          </div>                      -->
       </div>
+
+      <hr>
+      <div>
+         <form method="post">
+            <h4>Your Answer</h4>
+            <div class="form-group">
+               <textarea class="form-control" rows="5"></textarea>
+            </div>
+            <button class="btn btn-primary pull-right">Post Answer</button>
+         </form>
+      </div>
+
    </div>
    <div class="col-md-4">
       <div class="well">
          <h4>Tags</h4>
          <div class="row">
             <div class="col-lg-12">
-               <a href="{{url('blog/category/'.$category_array->id)}}" class="btn btn-default btn-xs">PHP</a>
-               <a href="{{url('blog/category/'.$category_array->id)}}" class="btn btn-default btn-xs">Java</a>
-               <a href="{{url('blog/category/'.$category_array->id)}}" class="btn btn-default btn-xs">HTML</a>
+               
             </div>
          </div>
       </div>
