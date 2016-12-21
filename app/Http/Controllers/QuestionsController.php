@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Tag;
+use App\Question;
+use Auth;
+use Session;
 
 class QuestionsController extends Controller
 {
@@ -13,7 +17,8 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        return view('questions');
+        $questions = Question::orderBy('id','desc')->get();
+        return view('questions',compact('questions'));
     }
 
     /**
@@ -21,9 +26,10 @@ class QuestionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-         return view('add_form');
+        $tags = Tag::orderBy('tag','asc')->get();;
+        return view('add_form',compact('tags'));
     }
 
     /**
@@ -34,7 +40,14 @@ class QuestionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $question = new Question;
+        $question->title = $request->title;
+        $question->user_id = Auth::user()->id;
+        $question->question = $request->question;
+        $question->save();
+        $question->tags()->attach($request->tags);
+        Session::flash('message', 'New Question has been added successfully.');
+        return back();
     }
 
     /**

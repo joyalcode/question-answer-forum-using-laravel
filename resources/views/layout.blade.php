@@ -9,6 +9,7 @@
       <title>Laravel</title>
       <link href="{{url('css/bootstrap.min.css')}}" rel="stylesheet">
       <link href="{{url('css/styles.css')}}" rel="stylesheet">
+      <link href="{{ url('css/select2.min.css')}}" rel="stylesheet">      
    </head>
    <body>
       <nav class="navbar navbar-default navbar-static-top">
@@ -38,5 +39,11 @@
       <footer style="height: 100px;"><hr></footer>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
+      <script src="{{ url('/') }}/js/select2.min.js"></script>
+      <script type="text/javascript">
+         $(".js-example-basic-multiple").select2({
+            placeholder: "Select one more tags"
+         });
+      </script>         
    </body>
 </html>

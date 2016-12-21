@@ -24,9 +24,4 @@ class Answer extends Model
     {
     	return $this->belongsTo("App\Question");
     }    
-
-    public function tags()
-    {
-        return $this->belongsToMany("App\Tag");
-    }
 }
