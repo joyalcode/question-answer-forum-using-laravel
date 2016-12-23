@@ -1,26 +1,20 @@
 <?php
-
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Answer extends Model
+class QuestionComment extends Model
 {
     protected $fillable = [
-        'answer'
+        'comment'
     ];
-
-    public function comments()
-    {
-    	return $this->hasMany("App\AnswerComment");
-    }
 
     public function user()
     {
     	return $this->belongsTo("App\User");
     }
 
-    public function question()
+    public function answer()
     {
     	return $this->belongsTo("App\Question");
     }

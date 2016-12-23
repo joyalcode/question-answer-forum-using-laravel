@@ -15,6 +15,11 @@ class Question extends Model
     	return $this->hasMany("App\Answer");
     }
 
+    public function comments()
+    {
+        return $this->hasMany("App\QuestionComment");
+    } 
+
     public function user()
     {
     	return $this->belongsTo("App\User");
@@ -23,5 +28,5 @@ class Question extends Model
     public function tags()
     {
         return $this->belongsToMany("App\Tag");
-    }
+    }   
 }

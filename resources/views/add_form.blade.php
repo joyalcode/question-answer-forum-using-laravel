@@ -21,17 +21,17 @@
                <h3>Ask Question</h3>
                <div class="form-group">
                   <label for="question-title">Question title</label>
-                  <input type="text" autofocus class="form-control" id="title" name="title">
+                  <input type="text" value="{{old('title')}}" autofocus class="form-control" id="title" name="title">
                </div>
                <div class="form-group">
                   <label for="pwd">Question details</label>
-                  <textarea class="form-control" rows="8" id="question" name="question"></textarea>
+                  <textarea class="form-control" rows="8" id="question" name="question">{{old('question')}}</textarea>
                </div>
                <div class="form-group">
                   <label for="question-title">Tags</label>
                   <select class="form-control js-example-basic-multiple" size="1" multiple name="tags[]" id="tags">
                      @foreach($tags as $tag_array)
-                     <option value="{{$tag_array->id}}">{{$tag_array->tag}}</option>
+                        <option value="{{$tag_array->id}}" @if(is_array(old('tags')) && in_array($tag_array->id, old('tags'))) selected @endif>{{$tag_array->tag}}</option>
                      @endForeach
                   </select>
                </div>

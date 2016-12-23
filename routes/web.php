@@ -13,21 +13,11 @@
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', 'QuestionsController@index');
 Route::resource('questions', 'QuestionsController');
-
-// Route::get('questions', function () {
-//     return view('questions');
-// });
-
-// Route::get('answers', function () {
-//     return view('answers');
-// });
-
+Route::post('questions/comment/{question}','QuestionsController@comment');
+Route::post('questions/answer/{question}','QuestionsController@answer');
+Route::post('answers/comment/{answer}','AnswersController@comment');
+Route::get('answers/','AnswersController@index');
 Auth::routes();
-
-Route::get('/home', 'HomeController@index');
 

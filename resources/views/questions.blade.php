@@ -4,26 +4,34 @@
    <div class="col-md-8">
       <ul class="list-group">
          <li class="list-group-item"><h4>Latest Questions</h4></li>
-         @foreach($questions as $question_array)
-         <li class="list-group-item">
-            <div class="row">
-               <div class="col-md-12 questions-list">
-                  <div><a href="">{{$question_array->user->name}}</a> <i>on April 25, 2015</i></div>
-                  <a class="questions-list-item" href="{{url('questions/'.$question_array->id)}}">
-                     <div>
-                     {{$question_array->title}}
+         @if(!$questions->isEmpty())
+            @foreach($questions as $question_array)
+            <li class="list-group-item">
+               <div class="row">
+                  <div class="col-md-12 questions-list">
+                     <div><a href="">{{$question_array->user->name}}</a> <i>on April 25, 2015</i></div>
+                     <a class="questions-list-item" href="{{url('questions/'.$question_array->id)}}">
+                        <div>
+                        {{$question_array->title}}
+                        </div>
+                     </a>
+                     <a href="{{url('questions/'.$question_array->id)}}" class="btn btn-primary btn-xs pull-right" style="margin-top: 10px;">{{$question_array->answers->count()}}
+                        @if($question_array->answers->count() == 1) Answer @else Answers @endIf 
+                           </a>
+                     <div style="margin-top: 10px;">
+                        @foreach($question_array->tags as $tag_array)
+                        <a href="" class="btn btn-info btn-xs">{{$tag_array->tag}}</a>
+                        @endForeach
                      </div>
-                  </a>
-                  <a href="" class="btn btn-primary btn-xs pull-right" style="margin-top: 10px;">{{$question_array->answers->count()}} Answers</a>
-                  <div style="margin-top: 10px;">
-                     @foreach($question_array->tags as $tag_array)
-                     <a href="" class="btn btn-info btn-xs">{{$tag_array->tag}}</a>
-                     @endForeach
                   </div>
                </div>
-            </div>
-         </li>
-         @endForeach
+            </li>
+            @endForeach
+         @else
+         <li class="list-group-item">
+            <i>No questions found.</i>
+         </li>   
+         @endIF
       </ul>
    </div>
    <div class="col-md-4">

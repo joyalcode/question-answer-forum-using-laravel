@@ -38,8 +38,9 @@
          @yield('contents')
       <footer style="height: 100px;"><hr></footer>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-      <script src="js/bootstrap.min.js"></script>
+      <script src="{{ url('/') }}/js/bootstrap.min.js"></script>
       <script src="{{ url('/') }}/js/select2.min.js"></script>
+      <script src="{{ url('/') }}/js/scripts.js"></script>
       <script type="text/javascript">
          $(".js-example-basic-multiple").select2({
             placeholder: "Select one more tags"

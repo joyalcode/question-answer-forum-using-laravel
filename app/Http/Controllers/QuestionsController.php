@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Tag;
 use App\Question;
+use App\Answer;
+use App\QuestionComment;
 use Auth;
 use Session;
 
@@ -40,6 +42,7 @@ class QuestionsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,$this->validationRules());
         $question = new Question;
         $question->title = $request->title;
         $question->user_id = Auth::user()->id;
@@ -93,5 +96,32 @@ class QuestionsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function comment(Question $question, Request $request)
+    {
+        $question_comment = new QuestionComment();
+        $question_comment->comment = $request->question_comment;
+        $question_comment->user_id = Auth::user()->id;
+        $question->comments()->save($question_comment);
+    }
+
+    public function answer(Question $question, Request $request)
+    {
+        $answer = new Answer();
+        $answer->answer = $request->answer;
+        $answer->user_id = Auth::user()->id;
+        $question->answers()->save($answer);
+        Session::flash('message', 'New answer has been added successfully.');
+        return back();
+    }
+
+
+    public function validationRules()
+    {
+        return [
+            'title' => 'required|max:255',
+            'question' => 'required',
+        ];
     }
 }

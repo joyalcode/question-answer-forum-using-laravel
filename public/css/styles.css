@@ -51,10 +51,14 @@
 
    .questions-list > .questions-list-item {
       color: #333;
-      font-size: 16px;
+      font-size: 15px;
    }
 
    .questions-list > .questions-list-item:hover {
       text-decoration: none;
       color: #999;
+   }
+
+   .margin-top-8{
+      margin-top: 8px;
    }
