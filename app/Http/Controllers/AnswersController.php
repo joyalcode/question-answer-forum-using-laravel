@@ -16,6 +16,7 @@ class AnswersController extends Controller
         $answer_comment->comment = $request->answer_comment;
         $answer_comment->user_id = Auth::user()->id;
         $answer->comments()->save($answer_comment);
+        return '<hr><div>'. $request->answer_comment . ' <a href="user/'.$answer_comment->user->id.'">'.$answer_comment->user->name.'</a></div>';
     }
 
     /**

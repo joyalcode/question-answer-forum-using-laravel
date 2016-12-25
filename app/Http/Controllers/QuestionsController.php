@@ -23,6 +23,22 @@ class QuestionsController extends Controller
         return view('questions',compact('questions'));
     }
 
+    public function user($user_id)
+    {
+        $questions = Question::orderBy('id','desc')->where('user_id',$user_id)->get();
+        return view('questions',compact('questions'));
+    }
+
+
+    public function tagged($id, $tag)
+    {
+        $questions = Question::orderBy('id','desc')->whereHas('tags', function($q) use ($id) {
+                                                        $q->where('tag_id', $id);
+                                                    })->get();
+
+        return view('questions',compact('questions'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -102,8 +118,9 @@ class QuestionsController extends Controller
     {
         $question_comment = new QuestionComment();
         $question_comment->comment = $request->question_comment;
-        $question_comment->user_id = Auth::user()->id;
+        $question_comment->user_id = Auth::user()->id;        
         $question->comments()->save($question_comment);
+        return '<hr><div>'. $request->question_comment . ' <a href="user/'.$question_comment->user->id.'">'.$question_comment->user->name.'</a></div>';
     }
 
     public function answer(Question $question, Request $request)

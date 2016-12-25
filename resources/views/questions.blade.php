@@ -1,6 +1,9 @@
 @extends('layout')
 @section('contents')
 <div class="container">
+   @if(Session::has('message'))
+      <p class="alert alert-success">{{ Session::get('message') }}</p>
+   @endif   
    <div class="col-md-8">
       <ul class="list-group">
          <li class="list-group-item"><h4>Latest Questions</h4></li>
@@ -9,7 +12,7 @@
             <li class="list-group-item">
                <div class="row">
                   <div class="col-md-12 questions-list">
-                     <div><a href="">{{$question_array->user->name}}</a> <i>on April 25, 2015</i></div>
+                     <div><a href="{{url('questions/user/'.$question_array->user->id)}}">{{$question_array->user->name}}</a> <i>on April 25, 2015</i></div>
                      <a class="questions-list-item" href="{{url('questions/'.$question_array->id)}}">
                         <div>
                         {{$question_array->title}}
@@ -20,7 +23,7 @@
                            </a>
                      <div style="margin-top: 10px;">
                         @foreach($question_array->tags as $tag_array)
-                        <a href="" class="btn btn-info btn-xs">{{$tag_array->tag}}</a>
+                        <a href="{{url('questions/tagged/'.$tag_array->id.'/'.strtolower($tag_array->tag))}}" class="btn btn-info btn-xs">{{$tag_array->tag}}</a>
                         @endForeach
                      </div>
                   </div>
