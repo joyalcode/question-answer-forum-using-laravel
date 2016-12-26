@@ -20,6 +20,16 @@ class LoginController extends Controller
     |
     */
 
+    public function showLoginForm(Request $request)
+    {
+        Session::forget('redirectPath');
+        if($request->src)
+        {
+            Session::put('redirectPath', $request->src);
+        }
+        return view('auth.login');
+    }    
+
     use AuthenticatesUsers;
 
     /**
@@ -27,7 +37,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/questions';
+    public $redirectTo = '/questions';
 
     /**
      * Create a new controller instance.
@@ -45,12 +55,21 @@ class LoginController extends Controller
         return redirect()->intended($this->redirectPath());
     }    
 
+    public function redirectPath()
+    {
+        if(Session::has('redirectPath'))
+        {
+            return Session::get('redirectPath');
+        }
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
+    }    
+
     public function logout(Request $request)
     {
         $this->guard()->logout();
         $request->session()->flush();
         $request->session()->regenerate();
-        Session::flash('message', 'You have been successfully logged out.');
+        Session::flash('message', 'You have been successfully logged out.');        
         return redirect('/questions');
     }
 }
