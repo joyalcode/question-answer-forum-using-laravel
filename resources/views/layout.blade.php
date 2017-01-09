@@ -26,13 +26,19 @@
             <div id="navbar" class="navbar-collapse collapse">
                <ul class="nav navbar-nav">
                   <li class="{{ Request::is('questions') ? 'active' : ''}}"><a href="{{url('questions')}}">Questions</a></li>
-                  <li class="{{ Request::is('questions/create') ? 'active' : ''}}"><a href="{{url('questions/create')}}">Ask Question</a></li>
+                  <li class="{{ Request::is('questions/create') ? 'active' : ''}}">
+                     @if (Auth::guest())
+                     <a href="{{url('login?src=questions/create')}}">Ask Question</a>
+                     @else
+                     <a href="{{url('questions/create')}}">Ask Question</a>
+                     @endIf
+                  </li>
                </ul>
                <!-- Right Side Of Navbar -->
                <ul class="nav navbar-nav navbar-right">
                   <!-- Authentication Links -->
                   @if (Auth::guest())
-                  <li><a href="{{ url('/login?src='.Request::path()) }}">Login</a></li>
+                  <li><a href="{{ url('/login')}}">Login</a></li>
                   <li><a href="{{ url('/register') }}">Register</a></li>
                   @else
                   <li class="dropdown">
@@ -41,7 +47,7 @@
                      </a>
                      <ul class="dropdown-menu" role="menu">
                         <li>
-                           <a href="{{ url('/logout?src='.Request::path()) }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                           <a href="{{ url('/logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                               Logout
                            </a>
                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">

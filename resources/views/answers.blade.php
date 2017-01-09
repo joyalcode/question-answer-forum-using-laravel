@@ -27,13 +27,19 @@
          <hr>
          <a href="javascript:void(0)" class="add-comment-link add-question-comment">Add a comment</a>
          <div class="form-group question-comment-form hidden" style="min-height: 65px;">
+         @if (Auth::guest())
+               <textarea disabled rows="1" class="form-control">Please login or register to add comments</textarea>
+               <a href="{{url('login?src='.Request::path())}}"  class="btn btn-primary btn-xs margin-top-8">Login</a>                 
+               <a href="{{url('register')}}" class="btn btn-primary btn-xs margin-top-8">Register</a>  
+         @else
             <form method="post" id="form-question_comment">
                {{csrf_field()}}
                <input type="hidden" id="question_id" value="{{$question->id}}">
                <textarea name="question_comment" rows="1" class="form-control" id="question_comment"></textarea>
                <button id="btn_add_comment" type="submit" class="btn btn-primary btn-xs margin-top-8">Add Comment</button>
                <span class="question-comment-ajax-loader hidden" style="margin-top: 8px;float:left;"><img src="{{url('images/loader.gif')}}"></span>
-            </form>
+            </form>      
+         @endIF   
          </div>
       </div>
       <h4>{{$question->answers->count()}} @if($question->answers->count() == 1) Answer @else Answers @endIf </h4>
@@ -59,6 +65,11 @@
          <hr>
          <a href="javascript:void(0)" id="{{$answer_array->id}}" class="add-comment-link add-answer-comment">Add a comment</a>
          <div class="form-group hidden" id="answer-comment-form-{{$answer_array->id}}">
+         @if (Auth::guest())
+               <textarea disabled rows="1" class="form-control">Please login or register to add comments</a></textarea>
+               <a href="{{url('login?src='.Request::path())}}" class="btn btn-primary btn-xs margin-top-8">Login</a>               
+               <a href="{{url('register')}}" class="btn btn-primary btn-xs margin-top-8">Register</a>               
+         @else
             <form method="post" id="answer_comment" class="answer-comment-form">
                {{csrf_field()}}
                <input type="hidden" id="answer_id" value="{{$answer_array->id}}">
@@ -66,18 +77,27 @@
                <button type="submit" class="btn btn-primary btn-xs margin-top-8 btn-answer-comment-{{$answer_array->id}}">Add Comment</button>
                <span class="answer-comment-ajax-loader-{{$answer_array->id}} hidden" style="margin-top: 8px;float:left;"><img src="{{url('images/loader.gif')}}"></span>
             </form>
+          @endIf  
          </div>
       </div>
       <hr>
       @endForeach
       <div>
          <form method="post" method="post" action="answer/{{$question->id}}">
-            {{csrf_field()}}
-            <h4>Your Answer</h4>
-            <div class="form-group">
-               <textarea class="form-control" name="answer" rows="5"></textarea>
-            </div>
-            <button class="btn btn-primary pull-right">Post Answer</button>
+            <h4 id="answer-form">Your Answer</h4>
+            @if (Auth::guest())
+               <div class="form-group">
+                  <textarea disabled class="form-control" rows="5">Please login or register to post your answer.</textarea>
+               </div>            
+               <a href="{{url('login?src='.Request::path())}}"  class="btn btn-primary">Login</a>                 
+               <a href="{{url('register')}}" class="btn btn-primary">Register</a>                
+               @else
+               {{csrf_field()}}
+               <div class="form-group">
+                  <textarea class="form-control" name="answer" rows="5"></textarea>
+               </div>            
+               <button class="btn btn-primary">Post Answer</button>
+            @endIF
          </form>
       </div>
    </div>

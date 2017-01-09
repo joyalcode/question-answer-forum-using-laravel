@@ -44,7 +44,7 @@ class QuestionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
         $tags = Tag::orderBy('tag','asc')->get();;
         return view('add_form',compact('tags'));
