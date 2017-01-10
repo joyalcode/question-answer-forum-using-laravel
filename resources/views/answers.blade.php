@@ -102,14 +102,7 @@
       </div>
    </div>
    <div class="col-md-4">
-      <div class="well">
-         <h4>Tags</h4>
-         <div class="row">
-            <div class="col-lg-12">
-               
-            </div>
-         </div>
-      </div>
+      @include('sidebar')    
    </div>
 </div>
 @endSection

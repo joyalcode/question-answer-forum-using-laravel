@@ -17,6 +17,9 @@
                @endif            
                <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                   {{ csrf_field() }}
+                  @if(Request::input('src') && Request::input('src') == 'questions/create')
+                  <div class="alert alert-info">Please login to post your question.</div>
+                  @endIf
                   <div class="form-group">
                      <label for="email" class="col-md-4 control-label">E-Mail Address</label>
                      <div class="col-md-6">

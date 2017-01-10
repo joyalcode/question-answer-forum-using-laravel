@@ -44,16 +44,7 @@
       </form>
    </div>
    <div class="col-md-4">
-      <div class="well">
-         <h4>Tags</h4>
-         <div class="row">
-            <div class="col-lg-12">
-               <a href="" class="btn btn-default btn-xs">PHP</a>
-               <a href="" class="btn btn-default btn-xs">Java</a>
-               <a href="" class="btn btn-default btn-xs">HTML</a>
-            </div>
-         </div>
-      </div>
+      @include('sidebar')
    </div>
 </div>
 @endSection

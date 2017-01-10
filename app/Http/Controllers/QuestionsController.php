@@ -58,7 +58,7 @@ class QuestionsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,$this->validationRules());
+        $this->validate($request,$this->validationRules(), $this->customErrorMessages());
         $question = new Question;
         $question->title = $request->title;
         $question->user_id = Auth::user()->id;
@@ -118,18 +118,24 @@ class QuestionsController extends Controller
     {
         $question_comment = new QuestionComment();
         $question_comment->comment = $request->question_comment;
-        $question_comment->user_id = Auth::user()->id;        
-        $question->comments()->save($question_comment);
-        return '<hr><div>'. $request->question_comment . ' <a href="user/'.$question_comment->user->id.'">'.$question_comment->user->name.'</a></div>';
+        if($request->question_comment)
+        {
+            $question_comment->user_id = Auth::user()->id;        
+            $question->comments()->save($question_comment);
+            return '<hr><div>'. $request->question_comment . ' <a href="user/'.$question_comment->user->id.'">'.$question_comment->user->name.'</a></div>';
+        }   
     }
 
     public function answer(Question $question, Request $request)
     {
         $answer = new Answer();
-        $answer->answer = $request->answer;
-        $answer->user_id = Auth::user()->id;
-        $question->answers()->save($answer);
-        Session::flash('message', 'New answer has been added successfully.');
+        if($request->answer)
+        {
+            $answer->answer = $request->answer;
+            $answer->user_id = Auth::user()->id;
+            $question->answers()->save($answer);
+            Session::flash('message', 'New answer has been added successfully.');
+        }    
         return back();
     }
 
@@ -139,6 +145,12 @@ class QuestionsController extends Controller
         return [
             'title' => 'required|max:255',
             'question' => 'required',
+            'tags' => 'required'
         ];
     }
+
+    public function customErrorMessages()
+    {
+        return $messages = ['tags.required' => 'One or more tags required.'];
+    }    
 }

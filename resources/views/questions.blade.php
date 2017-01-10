@@ -38,22 +38,7 @@
       </ul>
    </div>
    <div class="col-md-4">
-      <div class="well">
-         <h4>Tags</h4>
-         <div class="row">
-            <div class="col-lg-12">
-               <a href="" class="btn btn-default btn-xs">PHP</a>
-               <a href="" class="btn btn-default btn-xs">Java</a>
-               <a href="" class="btn btn-default btn-xs">HTML</a>
-            </div>
-         </div>
-      </div>
-      <div class="well">
-         <div class="row">
-            <div class="col-lg-12" style="height: 550px;">
-            </div>
-         </div>
-      </div>
+      @include('sidebar')
    </div>
 </div>
 @endSection

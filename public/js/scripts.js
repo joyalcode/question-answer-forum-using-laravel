@@ -36,7 +36,7 @@ $(function(){
 	   			$('.answer-comment-'+answer_id+':last').append(data)
 	        },
 	        error: function(data){
-	        	alert('eerrr');
+	        	alert('Error');
 	      }
 	 	})
 	});
