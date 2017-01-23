@@ -5,15 +5,11 @@ $('.add-question-comment').click(function(){
 	$('#question_comment').focus();
 });
 
-
-
 $('.add-answer-comment').click(function(){
 	$(this).hide();
 	$('#answer-comment-form-'+this.id).removeClass('hidden');
 	$('#answer-comment-'+this.id).focus();
 })
-
-
 
 $(function(){
 	$('.answer-comment-form').on('submit',function(e){
@@ -23,7 +19,6 @@ $(function(){
 
 	   $('.btn-answer-comment-'+answer_id).addClass('hidden');
 	   $('.answer-comment-ajax-loader-'+answer_id).removeClass('hidden');	
-
 
 	   $.ajax({
 	      type:"POST",
@@ -41,7 +36,6 @@ $(function(){
 	 	})
 	});
 });
-
 
 $(function(){
 	$('#form-question_comment').on('submit',function(e){
@@ -61,10 +55,8 @@ $(function(){
 	            $('#question_comment').val('');
 	        },
 	        error: function(data){
-	        	alert('eerrr')	;
+	        	alert('Error')	;
 	      }
 	 	})
 	});
 });
-
-

@@ -2,6 +2,7 @@
    h3.question {
       line-height: 30px;
       margin-top: 0px;
+      font-size: 20px;
    }
 
    .col-md-10 a {
@@ -65,4 +66,12 @@
    
    .sidebar{
       height: 550px;
+   }
+
+   .btn-tag{
+      margin-bottom: 8px;
+   }
+
+   .well-sidebar{
+      height: 390px;
    }

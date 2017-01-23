@@ -6,56 +6,44 @@ use Illuminate\Http\Request;
 use App\Tag;
 use App\Question;
 use App\Answer;
+use App\User;
 use App\QuestionComment;
 use Auth;
 use Session;
 
 class QuestionsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
+        $title = "Latest Questions";
         $questions = Question::orderBy('id','desc')->get();
-        return view('questions',compact('questions'));
+        return view('questions',compact('questions','title'));
     }
 
-    public function user($user_id)
+    public function user(User $user)
     {
-        $questions = Question::orderBy('id','desc')->where('user_id',$user_id)->get();
-        return view('questions',compact('questions'));
+        $title = "Questions by $user->name";
+        $questions = Question::orderBy('id','desc')->where('user_id',$user->id)->get();
+        return view('questions',compact('questions','title'));
     }
 
 
     public function tagged($id, $tag)
     {
+        $title = "Tagged questions: $tag";
         $questions = Question::orderBy('id','desc')->whereHas('tags', function($q) use ($id) {
                                                         $q->where('tag_id', $id);
                                                     })->get();
 
-        return view('questions',compact('questions'));
+        return view('questions',compact('questions','title'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $tags = Tag::orderBy('tag','asc')->get();;
         return view('add_form',compact('tags'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request,$this->validationRules(), $this->customErrorMessages());
@@ -65,53 +53,14 @@ class QuestionsController extends Controller
         $question->question = $request->question;
         $question->save();
         $question->tags()->attach($request->tags);
-        Session::flash('message', 'New Question has been added successfully.');
+        Session::flash('message', 'Your question has been posted successfully.');
         return back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Question $question)
     {
         return view('answers',compact('question'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     public function comment(Question $question, Request $request)
@@ -138,7 +87,6 @@ class QuestionsController extends Controller
         }    
         return back();
     }
-
 
     public function validationRules()
     {

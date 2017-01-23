@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="description" content="">
       <meta name="author" content="">
-      <title>Laravel</title>
+      <title>Laravel question answer forum</title>
       <link href="{{url('css/bootstrap.min.css')}}" rel="stylesheet">
       <link href="{{url('css/styles.css')}}" rel="stylesheet">
       <link href="{{ url('css/select2.min.css')}}" rel="stylesheet">
@@ -25,7 +25,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                <ul class="nav navbar-nav">
-                  <li class="{{ Request::is('questions') ? 'active' : ''}}"><a href="{{url('questions')}}">Questions</a></li>
+                  <li class="{{ Request::is('/','questions') ? 'active' : ''}}"><a href="{{url('questions')}}">Questions</a></li>
                   <li class="{{ Request::is('questions/create') ? 'active' : ''}}">
                      @if (Auth::guest())
                      <a href="{{url('login?src=questions/create')}}">Ask Question</a>

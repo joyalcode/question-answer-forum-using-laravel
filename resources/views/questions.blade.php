@@ -6,7 +6,7 @@
    @endif   
    <div class="col-md-8">
       <ul class="list-group">
-         <li class="list-group-item"><h4>Latest Questions</h4></li>
+         <li class="list-group-item"><h4>{{$title}}</h4></li>
          @if(!$questions->isEmpty())
             @foreach($questions as $question_array)
             <li class="list-group-item">

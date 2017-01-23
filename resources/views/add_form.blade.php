@@ -21,7 +21,7 @@
                <h3>Ask Question</h3>
                <div class="form-group">
                   <label for="question-title">Question title</label>
-                  <input type="text" value="{{old('title')}}" autofocus class="form-control" id="title" name="title">
+                  <input type="text" value="{{old('title')}}" maxlength="250" autofocus class="form-control" id="title" name="title">
                </div>
                <div class="form-group">
                   <label for="pwd">Question details</label>
