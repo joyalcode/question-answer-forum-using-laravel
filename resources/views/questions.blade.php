@@ -23,7 +23,7 @@
                            </a>
                      <div style="margin-top: 10px;">
                         @foreach($question_array->tags as $tag_array)
-                        <a href="{{url('questions/tagged/'.$tag_array->id.'/'.strtolower($tag_array->tag))}}" class="btn btn-info btn-xs">{{$tag_array->tag}}</a>
+                        <a href="{{url('questions/tagged/'.$tag_array->id.'/'.strtolower($tag_array->tag))}}" class="btn btn-info btn-xs btn-question-tag">{{$tag_array->tag}}</a>
                         @endForeach
                      </div>
                   </div>

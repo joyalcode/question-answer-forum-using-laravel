@@ -21,3 +21,20 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Tag::class, function (Faker\Generator $faker) {
+    return [
+        'tag'=> ucfirst($faker->word(5))
+    ];
+});
+
+$factory->define(App\Question::class, function (Faker\Generator $faker) {
+    return [
+	        'user_id' => App\User::inRandomOrder()->first()->id,
+	        'title' => $faker->text($maxNbChars = 125),
+	        'question' => $faker->text($maxNbChars =500),
+            'created_at' => $faker->dateTimeBetween($startDate = '-1 year', $endDate = 'now', $timezone = date_default_timezone_get()),
+            'updated_at' => $faker->dateTimeBetween($startDate = '-1 year', $endDate = 'now', $timezone = date_default_timezone_get())
+    ];
+});
+
