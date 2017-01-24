@@ -30,6 +30,7 @@
                </div>
             </li>
             @endForeach
+            <li class="list-group-item"><div align="center">{{ $questions->links() }}</div></li>
          @else
          <li class="list-group-item">
             <i>No questions found.</i>

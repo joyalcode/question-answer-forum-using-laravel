@@ -22,38 +22,6 @@ class DatabaseSeeder extends Seeder
         });        
     }
 
-	private function addAnswers($question_id)
-	{
-    	$faker = Faker::create();
-    	$question_comments_count = rand(0,5);
-    	for($i=0 ; $i<$question_comments_count; $i++)
-    	{
-            DB::table('answers')->insert([
-                'user_id' => App\User::inRandomOrder()->first()->id,
-                'question_id' => $question_id,
-                'answer' => $faker->text($maxNbChars = 250),
-            	'created_at' => $faker->dateTimeBetween($startDate = '-1 year', $endDate = 'now', $timezone = date_default_timezone_get()),
-            	'updated_at' => $faker->dateTimeBetween($startDate = '-1 year', $endDate = 'now', $timezone = date_default_timezone_get())
-            ]);    		
-    	}		
-	}    
-
-    private function addCommentsToQuestion($question_id)
-    {
-    	$faker = Faker::create();
-    	$question_comments_count = rand(0,5);
-    	for($i=0 ; $i<$question_comments_count; $i++)
-    	{
-            DB::table('question_comments')->insert([
-                'question_id' => $question_id,
-                'user_id' => App\User::inRandomOrder()->first()->id,
-                'comment' => $faker->text($maxNbChars = 125),
-            	'created_at' => $faker->dateTimeBetween($startDate = '-1 year', $endDate = 'now', $timezone = date_default_timezone_get()),
-            	'updated_at' => $faker->dateTimeBetween($startDate = '-1 year', $endDate = 'now', $timezone = date_default_timezone_get())
-            ]);    		
-    	}
-    }
-
     private function attachRandomTagsToQuestion($question_id, $tags_array)
     {
         shuffle($tags_array);
@@ -65,6 +33,55 @@ class DatabaseSeeder extends Seeder
                 'question_id' => $question_id,
                  'tag_id' => $tags_array[$i],
             ]);
-        }    	
+        }       
+    }
+
+    private function addCommentsToQuestion($question_id)
+    {
+        $faker = Faker::create();
+        $question_comments_count = rand(0,5);
+        for($i=0 ; $i<$question_comments_count; $i++)
+        {
+            DB::table('question_comments')->insert([
+                'question_id' => $question_id,
+                'user_id' => App\User::inRandomOrder()->first()->id,
+                'comment' => $faker->text($maxNbChars = 125),
+                'created_at' => $faker->dateTimeBetween($startDate = '-1 year', $endDate = 'now', $timezone = date_default_timezone_get()),
+                'updated_at' => $faker->dateTimeBetween($startDate = '-1 year', $endDate = 'now', $timezone = date_default_timezone_get())
+            ]);         
+        }
+    }
+
+	private function addAnswers($question_id)
+	{
+    	$faker = Faker::create();
+    	$question_comments_count = rand(0,5);
+    	for($i=0 ; $i<$question_comments_count; $i++)
+    	{
+            $answer_id = DB::table('answers')->insertGetId([
+                            'user_id' => App\User::inRandomOrder()->first()->id,
+                            'question_id' => $question_id,
+                            'answer' => $faker->text($maxNbChars = 500),
+                        	'created_at' => $faker->dateTimeBetween($startDate = '-1 year', $endDate = 'now', $timezone = date_default_timezone_get()),
+                        	'updated_at' => $faker->dateTimeBetween($startDate = '-1 year', $endDate = 'now', $timezone = date_default_timezone_get())
+                        ]);    
+            $this->addCommentsToAnswer($answer_id);                        		
+    	}		
+	}    
+
+    private function addCommentsToAnswer($answer_id)
+    {
+        $faker = Faker::create();
+        $question_comments_count = rand(0,5);
+        for($i=0 ; $i<$question_comments_count; $i++)
+        {
+            DB::table('answer_comments')->insert([
+                'answer_id' => $answer_id,
+                'user_id' => App\User::inRandomOrder()->first()->id,
+                'comment' => $faker->text($maxNbChars = 125),
+                'created_at' => $faker->dateTimeBetween($startDate = '-1 year', $endDate = 'now', $timezone = date_default_timezone_get()),
+                'updated_at' => $faker->dateTimeBetween($startDate = '-1 year', $endDate = 'now', $timezone = date_default_timezone_get())
+            ]);         
+        }        
     }
 }

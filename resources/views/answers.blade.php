@@ -2,6 +2,9 @@
 @section('contents')
 <div class="container">
    <div class="col-md-8">
+      @if(Session::has('message'))
+         <p class="alert alert-success">{{ Session::get('message') }}</p>
+      @endif     
       <h3 class="question">{{$question->title}}</h3>
       <div class="question-description">{{$question->question}}</div>
       <span class="well well-sm author">

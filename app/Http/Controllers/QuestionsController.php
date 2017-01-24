@@ -16,14 +16,14 @@ class QuestionsController extends Controller
     public function index()
     {
         $title = "Latest Questions";
-        $questions = Question::orderBy('id','desc')->get();
+        $questions = Question::orderBy('id','desc')->paginate(5);
         return view('questions',compact('questions','title'));
     }
 
     public function user(User $user)
     {
         $title = "Questions by $user->name";
-        $questions = Question::orderBy('id','desc')->where('user_id',$user->id)->get();
+        $questions = Question::orderBy('id','desc')->where('user_id',$user->id)->paginate(5);
         return view('questions',compact('questions','title'));
     }
 
@@ -33,7 +33,7 @@ class QuestionsController extends Controller
         $title = "Tagged questions: $tag";
         $questions = Question::orderBy('id','desc')->whereHas('tags', function($q) use ($id) {
                                                         $q->where('tag_id', $id);
-                                                    })->get();
+                                                    })->paginate(5);
 
         return view('questions',compact('questions','title'));
     }
@@ -83,7 +83,7 @@ class QuestionsController extends Controller
             $answer->answer = $request->answer;
             $answer->user_id = Auth::user()->id;
             $question->answers()->save($answer);
-            Session::flash('message', 'New answer has been added successfully.');
+            Session::flash('message', 'New answer has been posted successfully.');
         }    
         return back();
     }
